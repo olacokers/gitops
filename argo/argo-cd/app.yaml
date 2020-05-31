@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/olacokers/gitopsargo.git
-    targetRevision: HEAD
+    targetRevision: 0.1.0
     path: argo/
     chart: example-chart
     directory:
