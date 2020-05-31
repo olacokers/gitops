@@ -6,10 +6,10 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/olacokers/gitopsargo.git
-    targetRevision: 0.1.0
-    path: argo/
-    chart: example-chart
+    repoURL: https://raw.githubusercontent.com/IBM/charts/master/repo/stable/
+    targetRevision: 1.0.1
+    path: ibm-charts/
+    chart: ibm-nginx-dev
     directory:
       recurse: true
   destination:
