@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-app
+  name: adventure
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/olacokers/gitopsargo.git
     targetRevision: master
-    path: argo/example-chart
+    path: argo/manifest
     directory:
       recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: example-app
+    namespace: helmstuff
   syncPolicy:
     automated:
       prune: false
