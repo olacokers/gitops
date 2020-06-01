@@ -1,0 +1,82 @@
+---
+# Source: example-chart/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: adventure-example-chart
+  labels:
+    helm.sh/chart: example-chart-0.1.0
+    app.kubernetes.io/name: example-chart
+    app.kubernetes.io/instance: adventure
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: example-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: adventure-example-chart
+  labels:
+    helm.sh/chart: example-chart-0.1.0
+    app.kubernetes.io/name: example-chart
+    app.kubernetes.io/instance: adventure
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: example-chart
+    app.kubernetes.io/instance: adventure
+---
+# Source: example-chart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adventure-example-chart
+  labels:
+    helm.sh/chart: example-chart-0.1.0
+    app.kubernetes.io/name: example-chart
+    app.kubernetes.io/instance: adventure
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: example-chart
+      app.kubernetes.io/instance: adventure
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: example-chart
+        app.kubernetes.io/instance: adventure
+    spec:
+      serviceAccountName: adventure-example-chart
+      securityContext:
+        {}
+      containers:
+        - name: example-chart
+          securityContext:
+            {}
+          image: "nginx:1.16.0"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+
