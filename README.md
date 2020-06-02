@@ -1,1 +1,1 @@
-# gitopsargo
+# gitops
