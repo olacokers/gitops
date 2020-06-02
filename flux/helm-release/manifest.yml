@@ -6,6 +6,6 @@ metadata:
   spec:
     releaseName: influxdb
     chart: 
-      repository: https://charts.bitnami.com/bitnami
+      repository: 
       name: influxdb
       version: 0.2.4
